@@ -10,19 +10,19 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Classe utilitária para enviar mensagens e arquivos ao Telegram via bot API usando InputStream.
+ * Classe utilitÃ¡ria para enviar mensagens e arquivos ao Telegram via bot API usando InputStream.
  */
 public class TelegramNotifier {
 
   private static final String API_URL = "https://api.telegram.org/bot";
 
   /**
-   * Envia uma mensagem de texto para um chat específico.
+   * Envia uma mensagem de texto para um chat especÃ­fico.
    *
    * @param token Token do bot do Telegram.
    * @param chatId ID do chat ou grupo.
    * @param text Texto da mensagem.
-   * @throws IOException Em caso de erro na comunicação HTTP.
+   * @throws IOException Em caso de erro na comunicaÃ§Ã£o HTTP.
    */
   public static void sendMessage(String token, String chatId, String text) throws IOException {
     String urlStr = API_URL + token + "/sendMessage?chat_id=" + chatId + "&text=" + urlEncode(text);
@@ -30,15 +30,15 @@ public class TelegramNotifier {
   }
 
   /**
-   * Envia um arquivo (documento, imagem, áudio ou vídeo) para um chat.
+   * Envia um arquivo (documento, imagem, Ã¡udio ou vÃ­deo) para um chat.
    *
    * @param token Token do bot do Telegram.
    * @param chatId ID do chat ou grupo.
-   * @param inputStream Conteúdo do arquivo.
-   * @param fileName Nome do arquivo (ex: \"documento.pdf\").
-   * @param endpoint Endpoint da API (ex: \"sendDocument\", \"sendPhoto\").
-   * @param fileFieldName Nome do campo no form-data (ex: \"document\", \"photo\").
-   * @throws IOException Em caso de erro na comunicação HTTP.
+   * @param inputStream ConteÃºdo do arquivo.
+   * @param fileName Nome do arquivo (ex: "documento.pdf").
+   * @param endpoint Endpoint da API (ex: "sendDocument", "sendPhoto").
+   * @param fileFieldName Nome do campo no form-data (ex: "document", "photo").
+   * @throws IOException Em caso de erro na comunicaÃ§Ã£o HTTP.
    */
   private static void sendFile(String token, String chatId, InputStream inputStream, String fileName, String endpoint, String fileFieldName) throws IOException {
     String boundary = "===" + System.currentTimeMillis() + "===";
@@ -76,10 +76,10 @@ public class TelegramNotifier {
     if (responseCode != HttpURLConnection.HTTP_OK) {
       InputStream errorStream = conn.getErrorStream();
       if (errorStream != null) {
-        String response = new BufferedReader(new InputStreamReader(errorStream))
+        String response = new BufferedReader(new InputStreamReader(errorStream, "UTF-8"))
             .lines()
             .reduce("", (acc, line) -> acc + line + "\n");
-        throw new IOException("Erro na requisição: " + response);
+        throw new IOException("Erro na requisiÃ§Ã£o: " + response);
       }
     }
     conn.disconnect();
