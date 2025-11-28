@@ -8,7 +8,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- * Classe de teste para a {@link TelegramNotifier}. Lê configurações sensíveis de um arquivo externo testconfig.properties.
+ * Classe de teste para a {@link TelegramNotifier}. LÃª configuraÃ§Ãµes sensÃ­veis de um arquivo externo
+ * testconfig.properties.
  */
 public class TelegramNotifierTest {
 
